@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Now | IQ Classes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://iqclasses.github.io/scripts/logo.js" defer></script>
+    
+    <style>
+        body {
+            background-color: #F4F5FF;
+            color: #0F172A;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-[#0F172A] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="/"><iq-logo class="w-12 h-12"></iq-logo></a>
+
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
+                    <a href="https://iqclasses.github.io/batches" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                        <i data-lucide="calendar" class="w-4 h-4"></i> Batch Info
+                    </a>
+                    <a href="https://iqclasses.github.io/contact" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> Contact Us
+                    </a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://iqclasses.github.io/login" class="px-5 py-2.5 text-sm font-semibold rounded-lg hover:text-[#6366F1] transition-colors border border-transparent hover:border-[#6366F1]">
+                        Login
+                    </a>
+                    <a href="/" class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all">
+                        Back to Home
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0F172A] border-t border-gray-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="https://iqclasses.github.io/batches" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Batch Info</a>
+            <a href="https://iqclasses.github.io/contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Contact Us</a>
+            <hr class="border-gray-800 my-2">
+            <a href="/" class="block text-center px-3 py-2 rounded-md text-base font-medium bg-gray-800 text-white">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12 md:py-20 bg-gradient-to-b from-[#F4F5FF] to-white flex items-center justify-center">
+        <div class="max-w-xl w-full mx-auto px-4">
+            
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-black text-[#0F172A]">Student Enrollment Form</h1>
+                <p class="text-gray-600 mt-2 text-sm md:text-base">Start your journey towards academic mastery with IQ Classes.</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-gray-100 relative">
+                
+                <div id="form-alert" class="hidden mb-6 p-4 rounded-xl text-sm font-semibold flex items-center gap-2">
+                    <i id="alert-icon" class="w-5 h-5"></i>
+                    <span id="alert-text"></span>
+                </div>
+
+                <form id="enrollment-form" class="space-y-5">
+                    
+                    <div>
+                        <label for="name" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                            <i data-lucide="user" class="w-4 h-4 text-[#6366F1]"></i> Student's Full Name
+                        </label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe" 
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="class" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-[#6366F1]"></i> Class / Grade
+                            </label>
+                            <input type="text" id="class" name="class" required placeholder="e.g., Class X" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
+                        </div>
+                        <div>
+                            <label for="school" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                                <i data-lucide="school" class="w-4 h-4 text-[#6366F1]"></i> School Name
+                            </label>
+                            <input type="text" id="school" name="school" required placeholder="e.g., VPM Gyan Niketan" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="parents_name" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                            <i data-lucide="users" class="w-4 h-4 text-[#6366F1]"></i> Parent / Guardian Name
+                        </label>
+                        <input type="text" id="parents_name" name="parents_name" required placeholder="Robert Doe" 
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
+                    </div>
+
+                    <div>
+                        <label for="parents_number" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                            <i data-lucide="phone-call" class="w-4 h-4 text-[#6366F1]"></i> Parent's Contact Number
+                        </label>
+                        <input type="tel" id="parents_number" name="parents_number" required placeholder="10-digit mobile number" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" id="submit-btn" 
+                            class="w-full bg-[#6366F1] hover:bg-[#4338CA] text-white py-4 rounded-xl font-bold transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-2 group">
+                            <span>Submit Application</span>
+                            <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#0F172A] text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-[#6366F1]">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/faculty" class="hover:text-white transition-colors">Faculty Info</a></li>
+                        <li><a href="https://iqclasses.github.io/batches" class="hover:text-white transition-colors">Batch Details</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-[#6366F1]">Academic Portal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Student Login</a></li>
+                        <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Support Helpline</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-[#6366F1]">Latest Updates</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Announcements</a></li>
+                        <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Events & Workshops</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+                &copy; 2026 IQ Classes. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Supabase Config Setup ---
+        const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
+        const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20"; 
+
+        const form = document.getElementById('enrollment-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const alertBox = document.getElementById('form-alert');
+        const alertText = document.getElementById('alert-text');
+        const alertIcon = document.getElementById('alert-icon');
+
+        function showAlert(message, type = 'success') {
+            alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-800', 'bg-green-50', 'text-green-800');
+            
+            if (type === 'error') {
+                alertBox.classList.add('bg-red-50', 'text-red-800');
+                alertIcon.setAttribute('data-lucide', 'alert-circle');
+                alertText.textContent = message;
+            } else {
+                alertBox.classList.add('bg-green-50', 'text-green-800');
+                alertIcon.setAttribute('data-lucide', 'check-circle-2');
+                alertText.textContent = message;
+            }
+            alertBox.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Processing...</span> <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>`;
+
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                class: document.getElementById('class').value.trim(),
+                school: document.getElementById('school').value.trim(),
+                parents_name: document.getElementById('parents_name').value.trim(),
+                parents_number: document.getElementById('parents_number').value.trim()
+            };
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/enrollments`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_API_KEY,
+                        'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Server network connection refused. Check database keys.');
+                }
+
+                showAlert('Enrollment submitted successfully! We will contact you soon.');
+                form.reset();
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showAlert(error, "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Submit Application</span> <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>`;
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
