@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://iqclasses.github.io/scripts/logo.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
         body {
@@ -56,13 +57,24 @@
 
     <main class="flex-grow py-12 md:py-20 bg-gradient-to-b from-[#F4F5FF] to-white flex items-center justify-center">
         <div class="max-w-xl w-full mx-auto px-4">
+
+            <div id="success-info" class="hidden m-10 width-full height-full bg-green-50 border border-green-200 text-green-800 p-4 rounded-xl mb-6">
+                <div class="flex flex-col items-center justify-center gap-2 mb-2">
+                    <i data-lucide="check-circle-2" class="w-20 h-20"></i>
+                    <h1 class="text-2xl md:text-3xl font-black">Enrollment Successful!</h1>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <span>Thank you for your enrollment! We will contact you soon.</span>
+                    <a href="https://iqclasses.github.io/" class="bg-[#6366F1] hover:bg-[#4338CA] m-4 text-white px-4 py-2 rounded-lg font-semibold transition-all">Back to Home</a>
+                </div>
+            </div>
             
-            <div class="text-center mb-8">
+            <div id="form-header" class="text-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-black text-[#0F172A]">Student Enrollment Form</h1>
                 <p class="text-gray-600 mt-2 text-sm md:text-base">Start your journey towards academic mastery with IQ Classes.</p>
             </div>
 
-            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-gray-100 relative">
+            <div id="enrollment-form" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-gray-100 relative">
                 
                 <div id="form-alert" class="hidden mb-6 p-4 rounded-xl text-sm font-semibold flex items-center gap-2">
                     <i id="alert-icon" class="w-5 h-5"></i>
@@ -84,7 +96,7 @@
                             <label for="class" class="block text-sm font-bold text-gray-700 mb-1.5 flex items-center gap-1.5">
                                 <i data-lucide="graduation-cap" class="w-4 h-4 text-[#6366F1]"></i> Class / Grade
                             </label>
-                            <input type="text" id="class" name="class" required placeholder="e.g., Class X" 
+                            <input type="text" id="class" name="class" required placeholder="e.g., Class 10" 
                                 class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all">
                         </div>
                         <div>
@@ -161,82 +173,92 @@
     </footer>
 
     <script>
-        lucide.createIcons();
+lucide.createIcons();
 
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+const menuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+
+// --- Supabase Config Setup ---
+const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
+const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20"; 
+
+const form = document.getElementById('enrollment-form');
+const submitBtn = document.getElementById('submit-btn');
+const alertBox = document.getElementById('form-alert');
+const alertText = document.getElementById('alert-text');
+const alertIcon = document.getElementById('alert-icon');
+
+function showAlert(message, type = 'success') {
+    alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-800', 'bg-green-50', 'text-green-800');
+    
+    if (type === 'error') {
+        alertBox.classList.add('bg-red-50', 'text-red-800');
+        alertIcon.setAttribute('data-lucide', 'alert-circle');
+        alertText.textContent = message;
+    } else {
+        alertBox.classList.add('bg-green-50', 'text-green-800');
+        alertIcon.setAttribute('data-lucide', 'check-circle-2');
+        alertText.textContent = message;
+    }
+    alertBox.classList.add('flex');
+    lucide.createIcons();
+}
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>Processing...</span> <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>`;
+
+    const formData = {
+        name: document.getElementById('name').value.trim(),
+        class: document.getElementById('class').value.trim(),
+        school: document.getElementById('school').value.trim(),
+        parent_name: document.getElementById('parents_name').value.trim(),
+        parent_number: document.getElementById('parents_number').value.trim()
+    };
+
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/enrollments?apikey=${SUPABASE_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(formData)
         });
 
-        // --- Supabase Config Setup ---
-        const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
-        const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20"; 
-
-        const form = document.getElementById('enrollment-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const alertBox = document.getElementById('form-alert');
-        const alertText = document.getElementById('alert-text');
-        const alertIcon = document.getElementById('alert-icon');
-
-        function showAlert(message, type = 'success') {
-            alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-800', 'bg-green-50', 'text-green-800');
-            
-            if (type === 'error') {
-                alertBox.classList.add('bg-red-50', 'text-red-800');
-                alertIcon.setAttribute('data-lucide', 'alert-circle');
-                alertText.textContent = message;
-            } else {
-                alertBox.classList.add('bg-green-50', 'text-green-800');
-                alertIcon.setAttribute('data-lucide', 'check-circle-2');
-                alertText.textContent = message;
-            }
-            alertBox.classList.add('flex');
-            lucide.createIcons();
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || `HTTP Error! Status: ${response.status}`);
         }
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>Processing...</span> <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>`;
-
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                class: document.getElementById('class').value.trim(),
-                school: document.getElementById('school').value.trim(),
-                parents_name: document.getElementById('parents_name').value.trim(),
-                parents_number: document.getElementById('parents_number').value.trim()
-            };
-
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/enrollments`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': SUPABASE_API_KEY,
-                        'Authorization': `Bearer ${SUPABASE_API_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Server network connection refused. Check database keys.');
-                }
-
-                showAlert('Enrollment submitted successfully! We will contact you soon.');
-                form.reset();
-
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                showAlert(error, "error");
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Submit Application</span> <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>`;
-                lucide.createIcons();
-            }
+       emailjs.send("service_e9k8y1o","template_hrsgzrd",{
+            name: formData.name,
+            class: formData.class,
+            school: formData.school,
+            parent_name: formData.parent_name,
+            parent_number: formData.parent_number,
         });
+
+        showAlert('Enrollment submitted successfully! We will contact you soon.');
+        document.getElementById('success-info').classList.remove('hidden');
+        document.getElementById('enrollment-form').classList.add('hidden');
+        document.getElementById('form-header').classList.add('hidden');
+        form.reset();
+
+    } catch (error) {
+        console.error('Full Error Details:', error);
+        showAlert(error.message || "Something went wrong during submission.", "error");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Submit Application</span> <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>`;
+        lucide.createIcons();
+    }
+});
     </script>
 </body>
 </html>
