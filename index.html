@@ -55,6 +55,31 @@
         </div>
     </header>
 
+    <section class="bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="bg-[#6366F1] p-2 rounded-lg text-white">
+                        <i data-lucide="megaphone" class="w-5 h-5 animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold tracking-tight">Recent Announcements</h2>
+                        <p class="text-xs text-gray-400">Stay updated with the latest campus news</p>
+                    </div>
+                </div>
+                <a href="https://iqclasses.github.io/announcements" class="text-sm font-semibold text-[#6366F1] hover:text-[#818CF8] flex items-center gap-1 transition-colors group">
+                    View All Announcements 
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div id="announcements-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="animate-pulse bg-gray-900/40 border border-gray-800 p-5 rounded-xl h-28"></div>
+                <div class="animate-pulse bg-gray-900/40 border border-gray-800 p-5 rounded-xl h-28"></div>
+            </div>
+        </div>
+    </section>
+
     <section class="py-16 md:py-24 bg-gradient-to-b from-[#F4F5FF] to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -168,9 +193,7 @@
                             <p class="text-gray-500 text-sm font-medium">CTET & STET Qualified | P.G.(English Hons.) Pursuing</p>
                             <p class="text-gray-600 text-sm italic">"My mission is to break complex formulations down into relatable experiments."</p>
                         </div>
-                        <div class="w-full">
-
-                        </div>
+                        <div class="w-full"></div>
                     </div>
                 </div>
 
@@ -273,7 +296,6 @@
     <footer class="bg-[#0F172A] text-white py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-6 gap-8">
-
                 <div class="space-y-4 md:col-span-2">
                     <h4 class="font-bold text-[#6366F1]">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
@@ -293,13 +315,11 @@
                 <div class="space-y-4 md:col-span-2">
                     <h4 class="font-bold text-[#6366F1]">Latest Updates</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Announcements</a></li>
+                        <li><a href="https://iqclasses.github.io/announcements" class="hover:text-white transition-colors">Announcements</a></li>
                         <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Events & Workshops</a></li>
                     </ul>
                 </div>
-
             </div>
-
         </div>
     </footer>
 
@@ -326,7 +346,62 @@
                 loginBtnMobile.className = 'block text-center px-3 py-2 rounded-md text-base font-medium border border-green-500 text-green-500';
                 loginBtnMobile.href = 'https://iqclasses.github.io/dashboard';
             }
+
+            fetchAnnouncements();
         });
+
+        async function fetchAnnouncements() {
+            const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
+            const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20";
+            const gridContainer = document.getElementById('announcements-grid');
+
+            const url = `${SUPABASE_URL}/rest/v1/announcements?select=*&order=created_at.desc&limit=2&apikey=${SUPABASE_API_KEY}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_API_KEY,
+                        'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch data');
+                
+                const announcements = await response.json();
+                gridContainer.innerHTML = ''; // Clear modern skeletons
+
+                if (announcements.length === 0) {
+                    gridContainer.innerHTML = `<p class="text-sm text-gray-400 col-span-2 py-4">No recent announcements available.</p>`;
+                    return;
+                }
+
+                announcements.forEach(item => {
+                    const formattedDate = item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', {
+                        month: 'short', day: 'numeric', year: 'numeric'
+                    }) : 'Notice';
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-gray-900/40 border border-gray-800 p-5 rounded-xl hover:border-gray-700 transition-all flex flex-col justify-between';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-2.5 py-0.5 rounded-full">${item.category || 'Update'}</span>
+                                <span class="text-xs text-gray-500">${item.date || formattedDate}</span>
+                            </div>
+                            <h3 class="font-semibold text-white text-base line-clamp-1">${item.title || 'Notification'}</h3>
+                            <p class="text-gray-400 text-xs mt-1 line-clamp-2">${item.text || ''}</p>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Announcements Error:", error);
+                gridContainer.innerHTML = `<p class="text-sm text-red-400 col-span-2 py-4">Unable to load updates at this moment.</p>`;
+            }
+        }
     </script>
 </body>
 </html>
