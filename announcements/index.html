@@ -71,7 +71,7 @@
             </div>
 
             <div id="announcements-container" class="space-y-6 hidden">
-                </div>
+            </div>
 
             <div id="empty-state" class="hidden text-center bg-gray-250 border border-gray-200 p-12 rounded-2xl shadow-lg">
                 <i data-lucide="bell-off" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
@@ -144,75 +144,98 @@
             fetchAnnouncements();
         });
 
-async function fetchAnnouncements() {
-    const spinner = document.getElementById('loading-spinner');
-    const container = document.getElementById('announcements-container');
-    const emptyState = document.getElementById('empty-state');
+        // Config object mapping categories to matching Lucide icons and TailWind badges
+        const categoryMap = {
+            'extraclasses': { icon: 'book-open', text: 'Extra Classes', styles: 'bg-amber-50 text-amber-700 border-amber-200' },
+            'holiday': { icon: 'palmtree', text: 'Holiday', styles: 'bg-red-50 text-red-700 border-red-200' },
+            'result': { icon: 'trophy', text: 'Result', styles: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+            'ptm': { icon: 'users', text: 'PTM', styles: 'bg-purple-50 text-purple-700 border-purple-200' },
+            'offer': { icon: 'sparkles', text: 'Offer', styles: 'bg-pink-50 text-pink-700 border-pink-200' },
+            'workshop': { icon: 'graduation-cap', text: 'Workshop', styles: 'bg-cyan-50 text-cyan-700 border-cyan-200' },
+            'announcement': { icon: 'megaphone', text: 'Announcement', styles: 'bg-blue-50 text-blue-700 border-blue-200' }
+        };
 
-    try {
-        const url = `${SUPABASE_URL}/rest/v1/announcements?select=*&order=created_at.desc&apikey=${SUPABASE_API_KEY}`;
+        async function fetchAnnouncements() {
+            const spinner = document.getElementById('loading-spinner');
+            const container = document.getElementById('announcements-container');
+            const emptyState = document.getElementById('empty-state');
 
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'apikey': SUPABASE_API_KEY,
-                'Authorization': `Bearer ${SUPABASE_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const announcements = await response.json();
-
-        spinner.classList.add('hidden');
-
-        if (!announcements || announcements.length === 0) {
-            emptyState.classList.remove('hidden');
-            return;
-        }
-
-        container.innerHTML = announcements.map(item => {
-            let displayDate = item.date;
             try {
-                if (item.created_at) {
-                    displayDate = new Date(item.created_at).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
+                const url = `${SUPABASE_URL}/rest/v1/announcements?select=*&order=created_at.desc&apikey=${SUPABASE_API_KEY}`;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_API_KEY,
+                        'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-            } catch (e) {
-                displayDate = item.date || "Recent Update";
+
+                const announcements = await response.json();
+
+                spinner.classList.add('hidden');
+
+                if (!announcements || announcements.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+
+                container.innerHTML = announcements.map(item => {
+                    let displayDate = "";
+                    try {
+                        if (item.created_at) {
+                            displayDate = new Date(item.created_at).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } else {
+                            displayDate = item.date || "Recent Update";
+                        }
+                    } catch (e) {
+                        displayDate = item.date || "Recent Update";
+                    }
+
+                    // Normalize the category string to find it in our config object
+                    const normalizedCategory = (item.category || 'announcement').toLowerCase().replace(/\s+/g, '');
+                    const currentCategory = categoryMap[normalizedCategory] || categoryMap['announcement'];
+
+                    return `
+                        <article class="bg-white border border-gray-100 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all border-r-4 border-b-4 border-r-[#6366F1] border-b-[#6366F1] border-l-2 border-l-[#6366F1] border-t-2 border-t-[#6366F1] hover:border-r-[#4338CA] hover:border-b-[#4338CA]">
+                            <div class="flex flex-wrap items-center gap-3 mb-4 text-xs font-bold">
+                                <div class="flex items-center gap-1.5 text-[#4338CA]">
+                                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                                    <span>${displayDate}</span>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-full border text-[11px] font-extrabold flex items-center gap-1.5 uppercase tracking-wide ${currentCategory.styles}">
+                                    <i data-lucide="${currentCategory.icon}" class="w-3.5 h-3.5"></i>
+                                    ${currentCategory.text}
+                                </span>
+                            </div>
+                            <h2 class="text-xl md:text-2xl font-bold text-[#0F172A] mb-3 hover:text-[#6366F1] transition-colors cursor-pointer">
+                                ${item.title}
+                            </h2>
+                            <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+                                ${item.text}
+                            </p>
+                        </article>
+                    `;
+                }).join('');
+
+                container.classList.remove('hidden');
+                lucide.createIcons();
+                
+            } catch (error) {
+                console.error("Failed to parse data matrix rows:", error);
+                spinner.classList.add('hidden');
+                emptyState.classList.remove('hidden');
             }
-
-            return `
-                <article class="bg-white border border-gray-100 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all border-r-4 border-b-4 border-r-[#6366F1] border-b-[#6366F1] border-l-2 border-l-[#6366F1] border-t-2 border-t-[#6366F1] hover:border-r-[#4338CA] hover:border-b-[#4338CA]">
-                    <div class="flex items-center gap-2 text-xs font-bold text-[#4338CA] mb-3">
-                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-                        <span>${displayDate}</span>
-                    </div>
-                    <h2 class="text-xl md:text-2xl font-bold text-[#0F172A] mb-3 hover:text-[#6366F1] transition-colors cursor-pointer">
-                        ${item.title}
-                    </h2>
-                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        ${item.text}
-                    </p>
-                </article>
-            `;
-        }).join('');
-
-        container.classList.remove('hidden');
-        lucide.createIcons();
-        
-    } catch (error) {
-        console.error("Failed to parse data matrix rows:", error);
-        spinner.classList.add('hidden');
-        emptyState.classList.remove('hidden');
-    }
-}
+        }
     </script>
 </body>
 </html>
