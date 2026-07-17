@@ -32,7 +32,7 @@
                 </nav>
 
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="https://iqclasses.github.io/login" class="px-5 py-2.5 text-sm font-semibold rounded-lg hover:text-[#6366F1] transition-colors border border-transparent hover:border-[#6366F1]">
+                    <a href="https://iqclasses.github.io/login" id="login-btn-web" class="px-5 py-2.5 text-sm font-semibold rounded-lg hover:text-[#6366F1] transition-colors border border-transparent hover:border-[#6366F1]">
                         Login
                     </a>
                     <a href="https://iqclasses.github.io/enroll" class="bg-[#6366F1] hover:bg-[#4338CA] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg">
@@ -50,7 +50,7 @@
             <a href="https://iqclasses.github.io/batches" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Batch Info</a>
             <a href="https://iqclasses.github.io/contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Contact Us</a>
             <hr class="border-gray-800 my-2">
-            <a href="https://iqclasses.github.io/login" class="block text-center px-3 py-2 rounded-md text-base font-medium border border-[#6366F1] text-[#6366F1]">Login</a>
+            <a href="https://iqclasses.github.io/login" id="login-btn-mobile" class="block text-center px-3 py-2 rounded-md text-base font-medium border border-[#6366F1] text-[#6366F1]">Login</a>
             <a href="https://iqclasses.github.io/enroll" class="block text-center px-3 py-2 rounded-md text-base font-medium bg-[#6366F1] text-white">Enroll Now</a>
         </div>
     </header>
@@ -264,7 +264,7 @@
                 </div>
 
                 <div class="lg:col-span-7 bg-[#F4F5FF] border border-[#6366F1]/20 rounded-3xl overflow-hidden relative min-h-[350px] flex items-center justify-center p-8">
-                    <iframe width="650" height="400" src="https://maps.google.com/maps?width=650&height=400&hl=en&q=daltonganj%20%2C%20rsbn%20pu&t=&z=14&ie=UTF8&iwloc=B&output=embed" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe width="650" height="400" src="https://maps.google.com/maps?width=650&height=400&hl=en&q=daltonganj&t=&z=14&ie=UTF8&iwloc=B&output=embed" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -299,10 +299,6 @@
                 </div>
 
             </div>
-            
-            <div class="mt-8 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
-                &copy; 2026 IQ Classes. All rights reserved.
-            </div>
 
         </div>
     </footer>
@@ -315,6 +311,21 @@
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtnWeb = document.getElementById('login-btn-web');
+            const loginBtnMobile = document.getElementById('login-btn-mobile');
+
+            if (localStorage.getItem('studentRollNumber')) {
+                loginBtnWeb.textContent = 'Dashboard';
+                loginBtnWeb.className = 'px-5 py-2.5 text-sm font-semibold rounded-lg bg-green-500 hover:bg-green-700 transition-colors border border-transparent hover:border-[#000000]';
+                loginBtnWeb.href = 'https://iqclasses.github.io/dashboard';
+
+                loginBtnMobile.textContent = 'Dashboard';
+                loginBtnMobile.className = 'block text-center px-3 py-2 rounded-md text-base font-medium border border-green-500 text-green-500';
+                loginBtnMobile.href = 'https://iqclasses.github.io/dashboard';
+            }
         });
     </script>
 </body>
