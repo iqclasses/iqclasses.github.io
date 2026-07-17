@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements | IQ Classes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://iqclasses.github.io/scripts/logo.js" defer></script>
+    
+    <style>
+        body {
+            background-color: #F4F5FF;
+            color: #0F172A;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 z-50 bg-[#0F172A] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <iq-logo class="w-12 h-12"></iq-logo>
+
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
+                    <a href="https://iqclasses.github.io/batches" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                        <i data-lucide="calendar" class="w-4 h-4"></i> Batch Info
+                    </a>
+                    <a href="https://iqclasses.github.io/contact" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> Contact Us
+                    </a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://iqclasses.github.io/login" id="login-btn-web" class="px-5 py-2.5 text-sm font-semibold rounded-lg hover:text-[#6366F1] transition-colors border border-transparent hover:border-[#6366F1]">
+                        Login
+                    </a>
+                    <a href="https://iqclasses.github.io/enroll" class="bg-[#6366F1] hover:bg-[#4338CA] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                        Enroll Now
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0F172A] border-t border-gray-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="https://iqclasses.github.io/batches" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Batch Info</a>
+            <a href="https://iqclasses.github.io/contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Contact Us</a>
+            <hr class="border-gray-800 my-2">
+            <a href="https://iqclasses.github.io/login" id="login-btn-mobile" class="block text-center px-3 py-2 rounded-md text-base font-medium border border-[#6366F1] text-[#6366F1]">Login</a>
+            <a href="https://iqclasses.github.io/enroll" class="block text-center px-3 py-2 rounded-md text-base font-medium bg-[#6366F1] text-white">Enroll Now</a>
+        </div>
+    </header>
+
+    <main class="flex-grow py-16 md:py-24 bg-gradient-to-b from-[#F4F5FF] to-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-[#4338CA] text-sm font-extrabold uppercase tracking-widest">Stay Updated</span>
+                <h1 class="text-3xl md:text-5xl font-black text-[#0F172A] mt-2 tracking-tight">Latest Announcements</h1>
+                <div class="w-20 h-1 bg-[#6366F1] mx-auto mt-4 rounded"></div>
+                <p class="text-gray-600 mt-4 text-sm md:text-base">Find recent information regarding holidays, batch changes, upcoming exams, and academic news.</p>
+            </div>
+
+            <div id="loading-spinner" class="flex flex-col items-center justify-center py-12 space-y-4">
+                <div class="w-12 h-12 border-4 border-[#6366F1] border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-gray-500 font-medium text-sm">Fetching latest updates...</p>
+            </div>
+
+            <div id="announcements-container" class="space-y-6 hidden">
+                </div>
+
+            <div id="empty-state" class="hidden text-center bg-gray-250 border border-gray-200 p-12 rounded-2xl shadow-lg">
+                <i data-lucide="bell-off" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                <h3 class="font-bold text-lg text-[#0F172A]">No announcements found</h3>
+                <p class="text-gray-500 text-sm mt-1">Check back later for recent classroom logs and updates.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#0F172A] text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8">
+
+                <div class="space-y-4 md:col-span-2">
+                    <h4 class="font-bold text-[#6366F1]">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/faculty" class="hover:text-white transition-colors">Faculty Info</a></li>
+                        <li><a href="https://iqclasses.github.io/batches" class="hover:text-white transition-colors">Batch Details</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 md:col-span-2">
+                    <h4 class="font-bold text-[#6366F1]">Academic Portal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Student Login</a></li>
+                        <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Support Helpline</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 md:col-span-2">
+                    <h4 class="font-bold text-[#6366F1]">Latest Updates</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Announcements</a></li>
+                        <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Events & Workshops</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
+        const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20";
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtnWeb = document.getElementById('login-btn-web');
+            const loginBtnMobile = document.getElementById('login-btn-mobile');
+
+            if (localStorage.getItem('studentRollNumber')) {
+                loginBtnWeb.textContent = 'Dashboard';
+                loginBtnWeb.className = 'px-5 py-2.5 text-sm font-semibold rounded-lg bg-green-500 hover:bg-green-700 transition-colors border border-transparent hover:border-[#000000]';
+                loginBtnWeb.href = 'https://iqclasses.github.io/dashboard';
+
+                loginBtnMobile.textContent = 'Dashboard';
+                loginBtnMobile.className = 'block text-center px-3 py-2 rounded-md text-base font-medium border border-green-500 text-green-500';
+                loginBtnMobile.href = 'https://iqclasses.github.io/dashboard';
+            }
+
+            fetchAnnouncements();
+        });
+
+async function fetchAnnouncements() {
+    const spinner = document.getElementById('loading-spinner');
+    const container = document.getElementById('announcements-container');
+    const emptyState = document.getElementById('empty-state');
+
+    try {
+        const url = `${SUPABASE_URL}/rest/v1/announcements?select=*&order=created_at.desc&apikey=${SUPABASE_API_KEY}`;
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'apikey': SUPABASE_API_KEY,
+                'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const announcements = await response.json();
+
+        spinner.classList.add('hidden');
+
+        if (!announcements || announcements.length === 0) {
+            emptyState.classList.remove('hidden');
+            return;
+        }
+
+        container.innerHTML = announcements.map(item => {
+            let displayDate = item.date;
+            try {
+                if (item.created_at) {
+                    displayDate = new Date(item.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                }
+            } catch (e) {
+                displayDate = item.date || "Recent Update";
+            }
+
+            return `
+                <article class="bg-white border border-gray-100 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all border-r-4 border-b-4 border-r-[#6366F1] border-b-[#6366F1] border-l-2 border-l-[#6366F1] border-t-2 border-t-[#6366F1] hover:border-r-[#4338CA] hover:border-b-[#4338CA]">
+                    <div class="flex items-center gap-2 text-xs font-bold text-[#4338CA] mb-3">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                        <span>${displayDate}</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#0F172A] mb-3 hover:text-[#6366F1] transition-colors cursor-pointer">
+                        ${item.title}
+                    </h2>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+                        ${item.text}
+                    </p>
+                </article>
+            `;
+        }).join('');
+
+        container.classList.remove('hidden');
+        lucide.createIcons();
+        
+    } catch (error) {
+        console.error("Failed to parse data matrix rows:", error);
+        spinner.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+    }
+}
+    </script>
+</body>
+</html>
