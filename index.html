@@ -382,21 +382,44 @@
                         month: 'short', day: 'numeric', year: 'numeric'
                     }) : 'Notice';
 
-                    const card = document.createElement('div');
-                    card.className = 'bg-gray-900/40 border border-gray-800 p-5 rounded-xl hover:border-gray-700 transition-all flex flex-col justify-between';
-                    card.innerHTML = `
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-[#6366F1] bg-[#6366F1]/10 px-2.5 py-0.5 rounded-full">${item.category || 'Update'}</span>
-                                <span class="text-xs text-gray-500">${item.date || formattedDate}</span>
-                            </div>
-                            <h3 class="font-semibold text-white text-base line-clamp-1">${item.title || 'Notification'}</h3>
-                            <p class="text-gray-400 text-xs mt-1 line-clamp-2">${item.text || ''}</p>
-                        </div>
-                    `;
-                    gridContainer.appendChild(card);
-                });
+                    const categoryMap = {
+                        'extraclasses': { icon: 'book-open', text: 'Extra Classes', styles: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+                        'holiday': { icon: 'palmtree', text: 'Holiday', styles: 'bg-red-500/10 text-red-400 border-red-500/20' },
+                        'result': { icon: 'trophy', text: 'Result', styles: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
+                        'ptm': { icon: 'users', text: 'PTM', styles: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
+                        'offer': { icon: 'sparkles', text: 'Offer', styles: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
+                        'workshop': { icon: 'graduation-cap', text: 'Workshop', styles: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
+                        'announcement': { icon: 'megaphone', text: 'Announcement', styles: 'bg-blue-500/10 text-blue-400 border-blue-500/20' }
+                    };
+                    const normalizedCategory = (item.category || 'announcement').toLowerCase().replace(/\s+/g, '');
+                    const currentCategory = categoryMap[normalizedCategory] || categoryMap['announcement'];
+                
+                    const card = document.createElement('article');                    card.className = 'bg-gray-900/40 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all border-r-4 border-b-4 border-r-[#6366F1] border-b-[#6366F1] border-l-2 border-l-[#6366F1] border-t-2 border-t-[#6366F1] hover:border-r-[#4338CA] hover:border-b-[#4338CA] flex flex-col justify-between';
 
+                    card.innerHTML = `
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-[10px] font-bold">
+                            <div class="flex items-center gap-1 text-[#6366F1]">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>${formattedDate}</span>
+                                </div>
+                                <span class="px-2 py-0.5 rounded-full border text-[9px] font-extrabold flex items-center gap-1 uppercase tracking-wide ${currentCategory.styles}">
+                                    <i data-lucide="${currentCategory.icon}" class="w-3 h-3"></i>
+                                    ${currentCategory.text}
+                                    </span>
+                                    </div>
+                                    <h3 class="font-bold text-white text-base mb-1 hover:text-[#6366F1] transition-colors cursor-pointer line-clamp-1">
+                                        ${item.title || 'Notification'}
+                                        </h3>
+                                        <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+                                            ${item.text || ''}
+                                        </p>
+                    </div>
+            `;
+
+            gridContainer.appendChild(card);
+                });
+                lucide.createIcons();
             } catch (error) {
                 console.error("Announcements Error:", error);
                 gridContainer.innerHTML = `<p class="text-sm text-red-400 col-span-2 py-4">Unable to load updates at this moment.</p>`;
