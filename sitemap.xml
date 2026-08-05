@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://iqclasses.github.io/</loc>
+    <priority>1.00</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  
+  <!-- Batches / Courses -->
+  <url>
+    <loc>https://iqclasses.github.io/batches</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <!-- Contact Us -->
+  <url>
+    <loc>https://iqclasses.github.io/contact</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <!-- Enrollment Page -->
+  <url>
+    <loc>https://iqclasses.github.io/enroll</loc>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <!-- Announcements -->
+  <url>
+    <loc>https://iqclasses.github.io/announcements</loc>
+    <priority>0.70</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <!-- Faculty Info -->
+  <url>
+    <loc>https://iqclasses.github.io/faculty</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Login Page -->
+  <url>
+    <loc>https://iqclasses.github.io/login</loc>
+    <priority>0.50</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Student Dashboard -->
+  <url>
+    <loc>https://iqclasses.github.io/dashboard</loc>
+    <priority>0.50</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+</urlset>
