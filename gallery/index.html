@@ -1,1 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | IQ Classes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://iqclasses.github.io/scripts/logo.js" defer></script>
+    <style>
+        .no-save {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white min-h-screen flex flex-col justify-between">
 
+    <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="https://iqclasses.github.io" class="flex items-center gap-3">
+                    <iq-logo class="w-9 h-9"></iq-logo>
+                    <span class="font-black text-xl tracking-tight text-white">IQ<span class="text-indigo-500">CLASSES</span></span>
+                </a>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://iqclasses.github.io" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition-all">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-800/80 pb-8">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-800/60 text-indigo-400 text-xs font-bold uppercase tracking-wider">
+                    <i data-lucide="images" class="w-3.5 h-3.5"></i> Media Archive
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">Campus Gallery</h1>
+                <p class="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed">
+                    Explore event highlights, practical laboratory demonstrations, celebrations, and classroom milestones.
+                </p>
+            </div>
+
+            <div id="filter-wrapper" class="flex flex-wrap items-center gap-2">
+                <button data-filter="all" class="filter-pill px-4 py-2 rounded-xl text-xs font-bold border transition-all duration-200 bg-indigo-600 border-indigo-500 text-white shadow-sm shadow-indigo-500/20">
+                    All Albums
+                </button>
+            </div>
+        </div>
+
+        <div id="gallery-container" class="space-y-12">
+            <div class="bg-slate-900/60 border border-slate-800/80 p-6 sm:p-8 rounded-3xl space-y-6">
+                <div class="h-6 bg-slate-800 rounded-lg w-1/4 animate-pulse"></div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <div class="aspect-square bg-slate-800/60 rounded-2xl animate-pulse"></div>
+                    <div class="aspect-square bg-slate-800/60 rounded-2xl animate-pulse"></div>
+                    <div class="aspect-square bg-slate-800/60 rounded-2xl animate-pulse"></div>
+                    <div class="aspect-square bg-slate-800/60 rounded-2xl animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="media-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md flex flex-col justify-between items-center p-4 sm:p-6 select-none opacity-0 transition-opacity duration-200">
+        <div class="w-full max-w-5xl flex items-center justify-between text-white pb-3 border-b border-slate-800">
+            <span id="modal-title" class="text-sm font-semibold truncate tracking-wide text-slate-300">Preview</span>
+            <button id="modal-close" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div id="modal-content" class="flex-1 flex items-center justify-center max-w-5xl w-full py-4 overflow-hidden">
+            </div>
+
+        <p class="text-[11px] text-slate-500 tracking-wider font-medium">IQ Classes Visual Archives</p>
+    </div>
+
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500">
+        <p>© 2026 IQ Classes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Modal Handler
+        const modal = document.getElementById('media-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(src, isVideo, title) {
+            modalTitle.textContent = title;
+            modalContent.innerHTML = '';
+
+            if (isVideo) {
+                const videoEl = document.createElement('video');
+                videoEl.src = src;
+                videoEl.controls = true;
+                videoEl.autoplay = true;
+                videoEl.controlsList = 'nodownload noplaybackrate';
+                videoEl.disablePictureInPicture = true;
+                videoEl.className = 'max-h-[80vh] max-w-full rounded-2xl shadow-2xl border border-slate-800';
+                videoEl.oncontextmenu = (e) => e.preventDefault();
+                modalContent.appendChild(videoEl);
+            } else {
+                const imgEl = document.createElement('img');
+                imgEl.src = src;
+                imgEl.alt = title;
+                imgEl.className = 'max-h-[80vh] max-w-full rounded-2xl shadow-2xl object-contain no-save pointer-events-none border border-slate-800';
+                imgEl.oncontextmenu = (e) => e.preventDefault();
+                modalContent.appendChild(imgEl);
+            }
+
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => modal.classList.add('opacity-100'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.innerHTML = '';
+                document.body.style.overflow = '';
+            }, 200);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === modalContent) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+
+        // GitHub API Fetcher - All Albums
+        async function fetchAllGalleryFolders() {
+            const container = document.getElementById('gallery-container');
+            const filterWrapper = document.getElementById('filter-wrapper');
+            const GITHUB_REPO_API = "https://api.github.com/repos/iqclasses/iqclasses.github.io/contents/gallery";
+
+            try {
+                const response = await fetch(GITHUB_REPO_API);
+                if (!response.ok) throw new Error('Could not access gallery directory');
+
+                const contents = await response.json();
+                const folderItems = contents
+                    .filter(item => item.type === 'dir')
+                    .reverse();
+
+                if (folderItems.length === 0) {
+                    container.innerHTML = `
+                        <div class="bg-slate-900 border border-slate-800 p-12 rounded-3xl text-center">
+                            <i data-lucide="image-off" class="w-10 h-10 text-slate-500 mx-auto mb-3"></i>
+                            <p class="text-sm font-semibold text-slate-300">No event albums found</p>
+                            <p class="text-xs text-slate-500 mt-1">Check back soon as new campus media gets uploaded.</p>
+                        </div>`;
+                    lucide.createIcons();
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                for (const folder of folderItems) {
+                    const folderKey = folder.name.toLowerCase().replace(/\s+/g, '-');
+                    const folderTitle = folder.name
+                        .replace(/[-_]/g, ' ')
+                        .replace(/\b\w/g, l => l.toUpperCase());
+
+                    const mediaResponse = await fetch(folder.url);
+                    if (!mediaResponse.ok) continue;
+                    const mediaFiles = await mediaResponse.json();
+
+                    const mediaItems = mediaFiles.filter(file =>
+                        /\.(jpe?g|png|webp|gif|mp4|webm)$/i.test(file.name)
+                    );
+
+                    if (mediaItems.length === 0) continue;
+
+                    // Add dynamic tab filter button
+                    const filterBtn = document.createElement('button');
+                    filterBtn.dataset.filter = folderKey;
+                    filterBtn.className = 'filter-pill px-4 py-2 rounded-xl text-xs font-semibold border transition-all duration-200 bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700';
+                    filterBtn.textContent = folderTitle;
+                    filterWrapper.appendChild(filterBtn);
+
+                    // Album Card
+                    const folderBlock = document.createElement('div');
+                    folderBlock.className = "gallery-album bg-slate-900/40 p-6 sm:p-8 rounded-3xl border border-slate-800/80 space-y-6";
+                    folderBlock.dataset.album = folderKey;
+
+                    const headerHtml = `
+                        <div class="flex items-center justify-between border-b border-slate-800/60 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2.5 h-2.5 rounded-full bg-indigo-500"></div>
+                                <h2 class="font-black text-lg sm:text-xl text-white tracking-tight">${folderTitle}</h2>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700/60">${mediaItems.length} items</span>
+                        </div>
+                    `;
+
+                    const mediaGrid = document.createElement('div');
+                    mediaGrid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5";
+
+                    mediaItems.forEach(media => {
+                        const isVideo = /\.(mp4|webm)$/i.test(media.name);
+                        const rawUrl = media.download_url;
+
+                        const itemCard = document.createElement('div');
+                        itemCard.className = "group relative rounded-2xl overflow-hidden bg-slate-950 aspect-square cursor-pointer shadow-sm hover:shadow-indigo-500/10 transition-all duration-300 border border-slate-800";
+                        itemCard.oncontextmenu = (e) => e.preventDefault();
+
+                        if (isVideo) {
+                            itemCard.innerHTML = `
+                                <video src="${rawUrl}#t=0.5" preload="metadata" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 pointer-events-none"></video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 flex flex-col justify-between p-3.5">
+                                    <span class="self-end bg-slate-900/80 backdrop-blur-md text-[10px] font-bold text-white px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1">
+                                        <i data-lucide="video" class="w-3 h-3 text-indigo-400"></i> Video
+                                    </span>
+                                    <div class="w-9 h-9 rounded-xl bg-indigo-600/90 text-white flex items-center justify-center self-center group-hover:scale-110 transition-all shadow-lg">
+                                        <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
+                                    </div>
+                                    <div class="h-2"></div>
+                                </div>
+                            `;
+                        } else {
+                            itemCard.innerHTML = `
+                                <img src="${rawUrl}" alt="${media.name}" loading="lazy" class="no-save w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <div class="w-9 h-9 rounded-xl bg-slate-900/80 border border-slate-700/60 backdrop-blur-md text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i data-lucide="maximize-2" class="w-4 h-4 text-indigo-400"></i>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        itemCard.addEventListener('click', () => {
+                            openModal(rawUrl, isVideo, folderTitle);
+                        });
+
+                        mediaGrid.appendChild(itemCard);
+                    });
+
+                    folderBlock.innerHTML = headerHtml;
+                    folderBlock.appendChild(mediaGrid);
+                    container.appendChild(folderBlock);
+                }
+
+                // Filter logic
+                const filterBtns = document.querySelectorAll('.filter-pill');
+                const albums = document.querySelectorAll('.gallery-album');
+
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterBtns.forEach(b => {
+                            b.className = 'filter-pill px-4 py-2 rounded-xl text-xs font-semibold border transition-all duration-200 bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700';
+                        });
+                        btn.className = 'filter-pill px-4 py-2 rounded-xl text-xs font-bold border transition-all duration-200 bg-indigo-600 border-indigo-500 text-white shadow-sm shadow-indigo-500/20';
+
+                        const target = btn.dataset.filter;
+                        albums.forEach(album => {
+                            if (target === 'all' || album.dataset.album === target) {
+                                album.classList.remove('hidden');
+                            } else {
+                                album.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+
+                lucide.createIcons();
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 text-center space-y-2">
+                        <i data-lucide="alert-circle" class="w-6 h-6 text-rose-400 mx-auto"></i>
+                        <p class="text-sm font-semibold text-white">Failed to load media collections</p>
+                        <p class="text-xs text-slate-400">Ensure the <code>/gallery/</code> directory exists and is public on GitHub.</p>
+                    </div>`;
+                lucide.createIcons();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchAllGalleryFolders);
+    </script>
+</body>
+</html>
