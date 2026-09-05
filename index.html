@@ -1,241 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IQ Classes | Daltonganj | Elevating Minds, Shaping Futures</title>
+    <title>IQ Classes | Elevating Minds, Shaping Futures</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://iqclasses.github.io/scripts/logo.js" defer></script>
-    
     <style>
-        body {
-            background-color: #F4F5FF;
-            color: #0F172A;
+        /* Disable saving images via context menu or dragging */
+        .no-save {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
     </style>
 </head>
-<body class="font-sans antialiased">
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
-    <header class="sticky top-0 z-50 bg-[#0F172A] text-white shadow-lg">
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <iq-logo class="w-12 h-12"></iq-logo>
+                <a href="#" class="flex items-center gap-3">
+                    <iq-logo class="w-10 h-10"></iq-logo>
+                    <span class="font-black text-xl tracking-tight">IQ<span class="text-indigo-500">CLASSES</span></span>
+                </a>
 
                 <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
-                    <a href="https://iqclasses.github.io/batches" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                    <a href="https://iqclasses.github.io/batches" class="hover:text-indigo-400 transition-colors flex items-center gap-1.5 py-2">
                         <i data-lucide="calendar" class="w-4 h-4"></i> Batch Info
                     </a>
-                    <a href="https://iqclasses.github.io/contact" class="hover:text-[#6366F1] transition-colors flex items-center gap-1.5 py-2">
+                    <a href="#gallery" class="hover:text-indigo-400 transition-colors flex items-center gap-1.5 py-2">
+                        <i data-lucide="images" class="w-4 h-4"></i> Gallery
+                    </a>
+                    <a href="https://iqclasses.github.io/contact" class="hover:text-indigo-400 transition-colors flex items-center gap-1.5 py-2">
                         <i data-lucide="phone" class="w-4 h-4"></i> Contact Us
                     </a>
                 </nav>
 
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="https://iqclasses.github.io/login" id="login-btn-web" class="px-5 py-2.5 text-sm font-semibold rounded-lg hover:text-[#6366F1] transition-colors border border-transparent hover:border-[#6366F1]">
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="https://iqclasses.github.io/login" id="login-btn-web" class="px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
                         Login
                     </a>
-                    <a href="https://iqclasses.github.io/enroll" class="bg-[#6366F1] hover:bg-[#4338CA] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                    <a href="https://iqclasses.github.io/enroll" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow-indigo-500/20">
                         Enroll Now
                     </a>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none">
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-[#0F172A] border-t border-gray-800 px-4 pt-2 pb-6 space-y-3">
-            <a href="https://iqclasses.github.io/batches" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Batch Info</a>
-            <a href="https://iqclasses.github.io/contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800">Contact Us</a>
-            <hr class="border-gray-800 my-2">
-            <a href="https://iqclasses.github.io/login" id="login-btn-mobile" class="block text-center px-3 py-2 rounded-md text-base font-medium border border-[#6366F1] text-[#6366F1]">Login</a>
-            <a href="https://iqclasses.github.io/enroll" class="block text-center px-3 py-2 rounded-md text-base font-medium bg-[#6366F1] text-white">Enroll Now</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 pt-3 pb-6 space-y-2">
+            <a href="https://iqclasses.github.io/batches" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800">Batch Info</a>
+            <a href="#gallery" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800">Gallery</a>
+            <a href="https://iqclasses.github.io/contact" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-800">Contact Us</a>
+            <hr class="border-slate-800 my-2">
+            <a href="https://iqclasses.github.io/login" id="login-btn-mobile" class="block text-center px-3 py-2.5 rounded-xl text-sm font-semibold border border-indigo-500 text-indigo-400">Login</a>
+            <a href="https://iqclasses.github.io/enroll" class="block text-center px-3 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white">Enroll Now</a>
         </div>
     </header>
 
-    <section class="bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white py-8 border-t border-gray-800">
+    <section class="bg-slate-900 text-white py-6 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                <div class="flex items-center gap-2.5">
-                    <div class="bg-[#6366F1] p-2 rounded-lg text-white">
-                        <i data-lucide="megaphone" class="w-5 h-5 animate-pulse"></i>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="bg-indigo-500/10 border border-indigo-500/30 p-2 rounded-lg text-indigo-400">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold tracking-tight">Recent Announcements</h2>
-                        <p class="text-xs text-gray-400">Stay updated with the latest campus news</p>
+                        <h2 class="text-base font-bold tracking-tight">Recent Notices & Announcements</h2>
                     </div>
                 </div>
-                <a href="https://iqclasses.github.io/announcements" class="text-sm font-semibold text-[#6366F1] hover:text-[#818CF8] flex items-center gap-1 transition-colors group">
-                    View All Announcements 
-                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                <a href="https://iqclasses.github.io/announcements" class="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-colors">
+                    View All Notices <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                 </a>
             </div>
 
             <div id="announcements-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="animate-pulse bg-gray-900/40 border border-gray-800 p-5 rounded-xl h-28"></div>
-                <div class="animate-pulse bg-gray-900/40 border border-gray-800 p-5 rounded-xl h-28"></div>
+                <div class="animate-pulse bg-slate-800/60 border border-slate-700/50 p-4 rounded-xl h-24"></div>
+                <div class="animate-pulse bg-slate-800/60 border border-slate-700/50 p-4 rounded-xl h-24"></div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 md:py-24 bg-gradient-to-b from-[#F4F5FF] to-white">
+    <section class="py-16 md:py-24 bg-white border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-[#F4F5FF] border border-[#6366F1] text-[#4338CA] px-3.5 py-1.5 rounded-full text-sm font-semibold">
-                        <span class="flex h-2 w-2 rounded-full bg-[#6366F1] animate-pulse"></span>
-                        Admissions Open for 2026-2027
+                    <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-200 text-indigo-700 px-3.5 py-1.5 rounded-full text-xs font-semibold">
+                        <span class="flex h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
+                        Admissions Open for Academic Year 2026-2027
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0F172A] leading-tight">
-                        Unlock Your <span class="text-[#6366F1]">True Potential</span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+                        Unlock Your <span class="text-indigo-600">True Potential</span>
                     </h1>
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        At <strong>IQ Classes</strong>, we believe that education isn't just about memorizing theories—it's about understanding how they apply to the real world. We combine a structured, student-first curriculum with robust practical applications to make learning highly engaging, stress-free, and exceptionally rewarding.
+                    <p class="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+                        At <strong>IQ Classes</strong>, we believe education isn't just about memorizing theories—it's about understanding real-world application. Structured learning paired with practical experiments creates genuine conceptual clarity.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="https://iqclasses.github.io/enroll" class="bg-[#6366F1] hover:bg-[#4338CA] text-white px-8 py-4 rounded-xl text-md font-bold transition-all text-center shadow-md hover:shadow-xl flex items-center justify-center gap-2">
-                            Begin Your Journey <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="https://iqclasses.github.io/enroll" class="bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-3.5 rounded-xl text-sm font-bold transition-all text-center shadow-md hover:shadow-indigo-500/20 flex items-center justify-center gap-2">
+                            Begin Your Journey <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
-                        <a href="https://iqclasses.github.io/batches" class="border-2 border-[#0F172A] hover:bg-[#0F172A] hover:text-white text-[#0F172A] px-8 py-4 rounded-xl text-md font-bold transition-all text-center">
+                        <a href="https://iqclasses.github.io/batches" class="border border-slate-300 hover:border-slate-800 text-slate-800 px-7 py-3.5 rounded-xl text-sm font-bold transition-all text-center">
                             Explore Batches
                         </a>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 relative">
-                    <div class="absolute inset-0 bg-[#6366F1] rounded-3xl transform rotate-3 scale-102 opacity-10"></div>
-                    <div class="relative bg-white p-4 rounded-3xl shadow-xl border border-gray-100">
-                        <div class="w-full h-80 md:h-96 rounded-2xl bg-gradient-to-tr from-[#0F172A] to-[#4338CA] flex flex-col items-center justify-center text-white p-6 text-center">
-                            <i data-lucide="image" class="w-16 h-16 text-[#6366F1] mb-4 animate-bounce"></i>
-                            <h3 class="font-bold text-xl mb-1">Campus Life Preview</h3>
-                            <p class="text-sm text-gray-300 max-w-xs">This placeholder image will showcase our modern, state-of-the-art classroom facilities, labs, and interactive panels.</p>
+                <div class="lg:col-span-5">
+                    <div class="w-full h-80 rounded-2xl bg-gradient-to-tr from-slate-900 to-indigo-950 flex flex-col items-center justify-center text-white p-8 text-center border border-slate-800 shadow-xl">
+                        <div class="w-14 h-14 bg-indigo-600/20 border border-indigo-500/40 rounded-2xl flex items-center justify-center mb-4 text-indigo-400">
+                            <i data-lucide="sparkles" class="w-7 h-7"></i>
                         </div>
+                        <h3 class="font-bold text-xl mb-1">State-of-the-Art Learning</h3>
+                        <p class="text-sm text-slate-400 max-w-xs">Equipped with digital smart panels, live demonstration apparatus, and student-focused facilities.</p>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 md:py-20 bg-[#0F172A] text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#6366F1_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#6366F1] text-sm font-extrabold uppercase tracking-widest">Why IQ Classes?</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold mt-2">Features Built For Academic Mastery</h2>
-                <div class="w-20 h-1 bg-[#6366F1] mx-auto mt-4 rounded"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-[#6366F1] transition-all hover:-translate-y-1">
-                    <div class="bg-[#4338CA] w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="box" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">Experimental Focus</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Science concepts backed by live in-class experiments that spark curiosity and deepen understanding.</p>
-                </div>
-
-                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-[#6366F1] transition-all hover:-translate-y-1">
-                    <div class="bg-[#4338CA] w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="book-open" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">New NCERT Aligned</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Our curated learning assets are entirely structured around the updated curriculum and testing frameworks.</p>
-                </div>
-
-                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-[#6366F1] transition-all hover:-translate-y-1">
-                    <div class="bg-[#4338CA] w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="clipboard-check" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">Monthly Evaluations</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Rigorous mock exams to track progress, pinpoint learning curves, and improve time management.</p>
-                </div>
-
-                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-[#6366F1] transition-all hover:-translate-y-1">
-                    <div class="bg-[#4338CA] w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="trending-up" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">Detailed Analytics</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Comprehensive metric sheets sent directly to parents, mapping conceptual strong points and blind spots.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-20 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-6 space-y-6">
-                    <span class="text-[#4338CA] text-sm font-extrabold uppercase tracking-widest">Learn from the Expert</span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#0F172A]">MEET OUR HEAD FACULTY</h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        We pride ourselves on offering access to top-tier mentorship. Get to study under the guidance of <strong>Rishabh Verma</strong>, who has mentored CBSE Class X 2026 District Topper and has a proven track record of helping students achieve academic excellence. With over 8 years of teaching experience, he brings a wealth of knowledge and practical insights to the classroom.
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-widest">Why IQ Classes</span>
+                <h2 class="text-3xl font-extrabold mt-1">Built For Academic Mastery</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl">
+                    <div class="bg-indigo-600/20 text-indigo-400 w-10 h-10 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="flask-conical" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Experimental Focus</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Science concepts backed by live in-class experiments that spark curiosity and deepen understanding.</p>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl">
+                    <div class="bg-indigo-600/20 text-indigo-400 w-10 h-10 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="book-open-check" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">New NCERT Aligned</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Curated study modules strictly synchronized with the latest rationalized syllabus and boards pattern.</p>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl">
+                    <div class="bg-indigo-600/20 text-indigo-400 w-10 h-10 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="calendar-range" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Monthly Evaluations</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Systematic mock exams simulating real exam conditions to build stamina and identify weak spots.</p>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-2xl">
+                    <div class="bg-indigo-600/20 text-indigo-400 w-10 h-10 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Detailed Analytics</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Comprehensive progress sheets shared directly with parents to track growth throughout the term.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-indigo-600 text-xs font-bold uppercase tracking-widest">Faculty Leadership</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Meet Our Head Faculty</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Study under the direct mentorship of <strong>Rishabh Verma</strong>, mentor to CBSE Class X district toppers with over 8 years of foundational classroom experience.
                     </p>
                 </div>
 
-                <div class="lg:col-span-6">
-                    <div class="bg-[#F4F5FF] border border-[#6366F1]/30 rounded-3xl p-8 md:p-10 grid grid-cols-1 sm:grid-cols-3 gap-8 shadow-sm">
-
-                        <div class="flex-shrink-0 flex items-center justify-center">
-                            <div class="w-36 h-36 md:w-44 md:h-44 rounded-full bg-[#0F172A] border-4 border-white shadow-lg flex-shrink-0 flex items-center justify-center">
-                                <img src="https://iqclasses.github.io/files/images/pfps/pfp3.jpg" alt="Rishabh Verma" class="w-full h-full object-cover rounded-full">
-                            </div>
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+                        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-slate-200 flex-shrink-0 border border-slate-300">
+                            <img src="https://iqclasses.github.io/files/images/pfps/pfp3.jpg" alt="Rishabh Verma" class="w-full h-full object-cover no-save" oncontextmenu="return false;">
                         </div>
-
-                        <div class="text-center sm:text-left space-y-2 sm:col-span-4">
-                            <span class="bg-[#6366F1] text-white text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Head Faculty & Founder</span>
-                            <h3 class="text-2xl font-bold text-[#0F172A]">Rishabh Verma</h3>
-                            <p class="text-gray-500 text-sm font-medium">Teacher at VPM Gyan Niketan School | <strong>8+</strong> Years Academic Experience</p>
-                            <p class="text-gray-500 text-sm font-medium">CTET & STET Qualified | P.G.(English Hons.) Pursuing</p>
-                            <p class="text-gray-600 text-sm italic">"My mission is to break complex formulations down into relatable experiments."</p>
+                        <div class="space-y-1.5 text-center sm:text-left">
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">Head Faculty & Founder</span>
+                            <h3 class="text-xl font-bold text-slate-900">Rishabh Verma</h3>
+                            <p class="text-slate-600 text-xs">Faculty at VPM Gyan Niketan School | 8+ Years Experience</p>
+                            <p class="text-slate-500 text-xs">CTET & STET Qualified | P.G. (English Hons.)</p>
+                            <p class="text-slate-600 text-xs italic pt-1 text-indigo-900">"My mission is to break complex formulations down into relatable experiments."</p>
                         </div>
-                        <div class="w-full"></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section class="py-16 md:py-20 bg-[#F4F5FF]">
+    <section id="gallery" class="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#4338CA] text-sm font-extrabold uppercase tracking-widest">Success Stories</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#0F172A] mt-2">WHAT OUR STUDENTS SAY</h2>
-                <div class="w-20 h-1 bg-[#6366F1] mx-auto mt-4 rounded"></div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-3">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-2">
+                        <i data-lucide="image" class="w-3.5 h-3.5"></i> Moments & Milestones
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Events & Campus Gallery</h2>
+                </div>
+                <p class="text-xs font-medium text-slate-500 flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-indigo-500 animate-spin-slow"></i> Synchronized via Media Archives
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                    <p class="text-gray-600 italic leading-relaxed">
-                        "The focus on visual experiments at <strong>IQ Classes</strong> made physics so simple for me. The monthly assessment reports also helped my parents understand exactly where I needed extra practice."
+            <div id="gallery-container" class="space-y-12">
+                <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                    <div class="h-6 bg-slate-200 rounded-lg w-1/4 animate-pulse"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        <div class="aspect-square bg-slate-100 rounded-2xl animate-pulse"></div>
+                        <div class="aspect-square bg-slate-100 rounded-2xl animate-pulse"></div>
+                        <div class="aspect-square bg-slate-100 rounded-2xl animate-pulse"></div>
+                        <div class="aspect-square bg-slate-100 rounded-2xl animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="https://iqclasses.github.io/gallery" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-slate-300 text-slate-800 text-sm font-bold shadow-sm hover:border-indigo-600 hover:text-indigo-600 hover:shadow-md transition-all">
+                    View Complete Gallery <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="media-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex flex-col justify-between items-center p-4 sm:p-6 select-none opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-5xl flex items-center justify-between text-white pb-3 border-b border-slate-800">
+            <span id="modal-title" class="text-sm font-semibold truncate tracking-wide text-slate-300">Preview</span>
+            <button id="modal-close" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-all cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div id="modal-content" class="flex-1 flex items-center justify-center max-w-5xl w-full py-4 overflow-hidden">
+        </div>
+
+        <p class="text-[11px] text-slate-500 tracking-wider font-medium">IQ Classes Media Viewer</p>
+    </div>
+
+    <section class="py-16 md:py-20 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-indigo-600 text-xs font-bold uppercase tracking-widest">Testimonials</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Student Experiences</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "The focus on visual experiments at IQ Classes made physics intuitive. The regular mock assessments helped identify weak areas months before boards."
                     </p>
-                    <div class="flex items-center gap-4 mt-6">
-                        <div class="w-12 h-12 bg-[#4338CA] rounded-full flex items-center justify-center text-white font-bold">
-                            SK
-                        </div>
+                    <div class="flex items-center gap-3 mt-6">
+                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xs font-bold">SP</div>
                         <div>
-                            <h4 class="font-bold text-[#0F172A]">Shashank Pathak</h4>
-                            <p class="text-gray-500 text-xs">Score: 98.6% in CBSE Class X Boards</p>
+                            <h4 class="font-bold text-sm text-slate-900">Shashank Pathak</h4>
+                            <p class="text-slate-500 text-xs">Score: 98.6% in CBSE Class X</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                    <p class="text-gray-600 italic leading-relaxed">
-                        "<strong>Rishabh Sir’s</strong> teaching methodology is second to none. He patiently tackles every doubt until we fully grasp the foundational logic behind it."
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Rishabh Sir patient guidance makes complex topics easy. The structured notes and concept maps helped streamline my revision schedule."
                     </p>
-                    <div class="flex items-center gap-4 mt-6">
-                        <div class="w-12 h-12 bg-[#6366F1] rounded-full flex items-center justify-center text-white font-bold">
-                            AP
-                        </div>
+                    <div class="flex items-center gap-3 mt-6">
+                        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white text-xs font-bold">AP</div>
                         <div>
-                            <h4 class="font-bold text-[#0F172A]">Ananya Patel</h4>
-                            <p class="text-gray-500 text-xs">Class 10 Student</p>
+                            <h4 class="font-bold text-sm text-slate-900">Ananya Patel</h4>
+                            <p class="text-slate-500 text-xs">Class 10 Student</p>
                         </div>
                     </div>
                 </div>
@@ -243,80 +281,74 @@
         </div>
     </section>
 
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-                
-                <div class="lg:col-span-5 flex flex-col justify-between space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div class="lg:col-span-5 bg-white p-8 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-6">
                     <div>
-                        <span class="text-[#4338CA] text-sm font-extrabold uppercase tracking-widest">Let's Connect</span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold text-[#0F172A] mt-2">FIND US IN THE CITY</h2>
-                        <div class="w-20 h-1 bg-[#4338CA] mt-4 rounded"></div>
-                        <p class="text-gray-600 mt-6 leading-relaxed">
-                            Have query about structural fees, upcoming academic cycles, or batch options? Visit our central hub or call us directly.
+                        <span class="text-indigo-600 text-xs font-bold uppercase tracking-widest">Connect</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Find Us In Daltonganj</h2>
+                        <p class="text-slate-600 text-xs mt-2 leading-relaxed">
+                            Questions regarding admissions or batches? Visit our campus or get in touch.
                         </p>
                     </div>
 
                     <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-[#F4F5FF] text-[#4338CA] p-3 rounded-lg">
-                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-indigo-50 text-indigo-600 p-2 rounded-lg">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-[#0F172A]">Campus Location</h4>
-                                <p class="text-gray-600 text-sm">Near RBSN Public School , Sichai Vibhag , Bypass Road , Daltonganj</p>
+                                <h4 class="font-bold text-xs text-slate-900">Campus Location</h4>
+                                <p class="text-slate-600 text-xs">Near RBSN Public School, Sichai Vibhag, Bypass Road, Daltonganj</p>
                             </div>
                         </div>
 
-                        <div class="flex items-start gap-4">
-                            <div class="bg-[#F4F5FF] text-[#4338CA] p-3 rounded-lg">
-                                <i data-lucide="mail" class="w-6 h-6"></i>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-indigo-50 text-indigo-600 p-2 rounded-lg">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-[#0F172A]">Email Us</h4>
-                                <p class="text-gray-600 text-sm">iqclasses01@gmail.com</p>
+                                <h4 class="font-bold text-xs text-slate-900">Email Us</h4>
+                                <p class="text-slate-600 text-xs">iqclasses01@gmail.com</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-4">
-                        <a href="https://iqclasses.github.io/contact" class="bg-[#0F172A] hover:bg-[#6366F1] text-white px-8 py-4 rounded-xl text-md font-bold transition-all shadow-md inline-block">
-                            Get Directions
-                        </a>
-                    </div>
+                    <a href="https://iqclasses.github.io/contact" class="bg-slate-900 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-xs font-bold transition-all text-center">
+                        Get Full Directions
+                    </a>
                 </div>
 
-                <div class="lg:col-span-7 bg-[#F4F5FF] border border-[#6366F1]/20 rounded-3xl overflow-hidden relative min-h-[350px] flex items-center justify-center p-8">
-                    <iframe width="650" height="400" src="https://maps.google.com/maps?width=650&height=400&hl=en&q=daltonganj&t=&z=14&ie=UTF8&iwloc=B&output=embed" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl overflow-hidden min-h-[300px]">
+                    <iframe class="w-full h-full min-h-[320px]" src="https://maps.google.com/maps?width=650&height=400&hl=en&q=daltonganj&t=&z=14&ie=UTF8&iwloc=B&output=embed" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-[#0F172A] text-white py-12 border-t border-gray-800">
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-8">
-                <div class="space-y-4 md:col-span-2">
-                    <h4 class="font-bold text-[#6366F1]">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="font-bold text-white mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2">
                         <li><a href="https://iqclasses.github.io/faculty" class="hover:text-white transition-colors">Faculty Info</a></li>
                         <li><a href="https://iqclasses.github.io/batches" class="hover:text-white transition-colors">Batch Details</a></li>
                     </ul>
                 </div>
-
-                <div class="space-y-4 md:col-span-2">
-                    <h4 class="font-bold text-[#6366F1]">Academic Portal</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                <div>
+                    <h4 class="font-bold text-white mb-3">Academic Portal</h4>
+                    <ul class="space-y-2">
                         <li><a href="https://iqclasses.github.io/login" class="hover:text-white transition-colors">Student Login</a></li>
                         <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Support Helpline</a></li>
                     </ul>
                 </div>
-
-                <div class="space-y-4 md:col-span-2">
-                    <h4 class="font-bold text-[#6366F1]">Latest Updates</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                <div>
+                    <h4 class="font-bold text-white mb-3">Updates</h4>
+                    <ul class="space-y-2">
                         <li><a href="https://iqclasses.github.io/announcements" class="hover:text-white transition-colors">Announcements</a></li>
-                        <li><a href="https://iqclasses.github.io/contact" class="hover:text-white transition-colors">Events & Workshops</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition-colors">Events & Media</a></li>
                     </ul>
                 </div>
             </div>
@@ -326,35 +358,89 @@
     <script>
         lucide.createIcons();
 
+        // Mobile Menu Toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
+        // Modal Elements & Handler
+        const modal = document.getElementById('media-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(src, isVideo, title) {
+            modalTitle.textContent = title;
+            modalContent.innerHTML = '';
+
+            if (isVideo) {
+                const videoEl = document.createElement('video');
+                videoEl.src = src;
+                videoEl.controls = true;
+                videoEl.autoplay = true;
+                videoEl.controlsList = 'nodownload noplaybackrate';
+                videoEl.disablePictureInPicture = true;
+                videoEl.className = 'max-h-[80vh] max-w-full rounded-2xl shadow-2xl border border-slate-800';
+                videoEl.oncontextmenu = (e) => e.preventDefault();
+                modalContent.appendChild(videoEl);
+            } else {
+                const imgEl = document.createElement('img');
+                imgEl.src = src;
+                imgEl.alt = title;
+                imgEl.className = 'max-h-[80vh] max-w-full rounded-2xl shadow-2xl object-contain no-save pointer-events-none border border-slate-800/80';
+                imgEl.oncontextmenu = (e) => e.preventDefault();
+                modalContent.appendChild(imgEl);
+            }
+
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => modal.classList.add('opacity-100'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.innerHTML = '';
+                document.body.style.overflow = '';
+            }, 250);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === modalContent) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+
+        // Check Auth Status
         document.addEventListener('DOMContentLoaded', () => {
             const loginBtnWeb = document.getElementById('login-btn-web');
             const loginBtnMobile = document.getElementById('login-btn-mobile');
 
             if (localStorage.getItem('studentRollNumber')) {
+                const activeBtnClass = 'px-4 py-2 text-xs font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 transition-all';
                 loginBtnWeb.textContent = 'Dashboard';
-                loginBtnWeb.className = 'px-5 py-2.5 text-sm font-semibold rounded-lg bg-green-500 hover:bg-green-700 transition-colors border border-transparent hover:border-[#000000]';
+                loginBtnWeb.className = activeBtnClass;
                 loginBtnWeb.href = 'https://iqclasses.github.io/dashboard';
 
                 loginBtnMobile.textContent = 'Dashboard';
-                loginBtnMobile.className = 'block text-center px-3 py-2 rounded-md text-base font-medium border border-green-500 text-green-500';
+                loginBtnMobile.className = 'block text-center px-3 py-2.5 rounded-xl text-sm font-semibold bg-emerald-600 text-white';
                 loginBtnMobile.href = 'https://iqclasses.github.io/dashboard';
             }
 
             fetchAnnouncements();
+            fetchGalleryFolders();
         });
 
+        // Supabase Announcements
         async function fetchAnnouncements() {
             const SUPABASE_URL = "https://ngamvqzvnumjvdwtxzhs.supabase.co"; 
             const SUPABASE_API_KEY = "sb_publishable_F6l1LyJ5Tv3lRWpG9BHX4Q_UTsv6x20";
             const gridContainer = document.getElementById('announcements-grid');
-
             const url = `${SUPABASE_URL}/rest/v1/announcements?select=*&order=created_at.desc&limit=2&apikey=${SUPABASE_API_KEY}`;
 
             try {
@@ -367,13 +453,12 @@
                     }
                 });
 
-                if (!response.ok) throw new Error('Failed to fetch data');
-                
+                if (!response.ok) throw new Error('Failed to fetch announcements');
                 const announcements = await response.json();
-                gridContainer.innerHTML = ''; // Clear modern skeletons
+                gridContainer.innerHTML = '';
 
-                if (announcements.length === 0) {
-                    gridContainer.innerHTML = `<p class="text-sm text-gray-400 col-span-2 py-4">No recent announcements available.</p>`;
+                if (!announcements.length) {
+                    gridContainer.innerHTML = `<p class="text-xs text-slate-400 col-span-2 py-2">No recent announcements available.</p>`;
                     return;
                 }
 
@@ -382,47 +467,135 @@
                         month: 'short', day: 'numeric', year: 'numeric'
                     }) : 'Notice';
 
-                    const categoryMap = {
-                        'extraclasses': { icon: 'book-open', text: 'Extra Classes', styles: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
-                        'holiday': { icon: 'palmtree', text: 'Holiday', styles: 'bg-red-500/10 text-red-400 border-red-500/20' },
-                        'result': { icon: 'trophy', text: 'Result', styles: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
-                        'ptm': { icon: 'users', text: 'PTM', styles: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
-                        'offer': { icon: 'sparkles', text: 'Offer', styles: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
-                        'workshop': { icon: 'graduation-cap', text: 'Workshop', styles: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
-                        'announcement': { icon: 'megaphone', text: 'Announcement', styles: 'bg-blue-500/10 text-blue-400 border-blue-500/20' }
-                    };
-                    const normalizedCategory = (item.category || 'announcement').toLowerCase().replace(/\s+/g, '');
-                    const currentCategory = categoryMap[normalizedCategory] || categoryMap['announcement'];
-                
-                    const card = document.createElement('article');                    card.className = 'bg-gray-900/40 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all border-r-4 border-b-4 border-r-[#6366F1] border-b-[#6366F1] border-l-2 border-l-[#6366F1] border-t-2 border-t-[#6366F1] hover:border-r-[#4338CA] hover:border-b-[#4338CA] flex flex-col justify-between';
-
+                    const card = document.createElement('article');
+                    card.className = 'bg-slate-800/80 border border-slate-700/60 p-4 rounded-xl flex flex-col justify-between hover:border-indigo-500/50 transition-all';
                     card.innerHTML = `
-                    <div>
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-[10px] font-bold">
-                            <div class="flex items-center gap-1 text-[#6366F1]">
-                                <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>${formattedDate}</span>
-                                </div>
-                                <span class="px-2 py-0.5 rounded-full border text-[9px] font-extrabold flex items-center gap-1 uppercase tracking-wide ${currentCategory.styles}">
-                                    <i data-lucide="${currentCategory.icon}" class="w-3 h-3"></i>
-                                    ${currentCategory.text}
-                                    </span>
-                                    </div>
-                                    <h3 class="font-bold text-white text-base mb-1 hover:text-[#6366F1] transition-colors cursor-pointer line-clamp-1">
-                                        ${item.title || 'Notification'}
-                                        </h3>
-                                        <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
-                                            ${item.text || ''}
-                                        </p>
-                    </div>
-            `;
-
-            gridContainer.appendChild(card);
+                        <div>
+                            <div class="flex items-center justify-between text-[11px] text-indigo-400 mb-1 font-semibold">
+                                <span>${item.category || 'Notice'}</span>
+                                <span class="text-slate-400">${formattedDate}</span>
+                            </div>
+                            <h3 class="font-bold text-white text-sm hover:text-indigo-400 transition-colors line-clamp-1">${item.title || 'Notification'}</h3>
+                            <p class="text-slate-400 text-xs mt-1 line-clamp-2 leading-relaxed">${item.text || ''}</p>
+                        </div>
+                    `;
+                    gridContainer.appendChild(card);
                 });
                 lucide.createIcons();
             } catch (error) {
-                console.error("Announcements Error:", error);
-                gridContainer.innerHTML = `<p class="text-sm text-red-400 col-span-2 py-4">Unable to load updates at this moment.</p>`;
+                gridContainer.innerHTML = `<p class="text-xs text-rose-400 col-span-2 py-2">Unable to load updates.</p>`;
+            }
+        }
+
+        // Gallery GitHub API Fetcher (Limited to the 2 latest folders)
+        async function fetchGalleryFolders() {
+            const container = document.getElementById('gallery-container');
+            const GITHUB_REPO_API = "https://api.github.com/repos/iqclasses/iqclasses.github.io/contents/gallery";
+
+            try {
+                const response = await fetch(GITHUB_REPO_API);
+                if (!response.ok) throw new Error('Could not access gallery directory');
+                
+                const contents = await response.json();
+                const folderItems = contents
+                    .filter(item => item.type === 'dir')
+                    .reverse()
+                    .slice(0, 2);
+
+                if (folderItems.length === 0) {
+                    container.innerHTML = `
+                        <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center">
+                            <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+                            <p class="text-sm text-slate-500 font-medium">No event folders discovered yet.</p>
+                        </div>`;
+                    lucide.createIcons();
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                for (const folder of folderItems) {
+                    const folderTitle = folder.name
+                        .replace(/[-_]/g, ' ')
+                        .replace(/\b\w/g, l => l.toUpperCase());
+
+                    const mediaResponse = await fetch(folder.url);
+                    if (!mediaResponse.ok) continue;
+                    const mediaFiles = await mediaResponse.json();
+
+                    const mediaItems = mediaFiles.filter(file => 
+                        /\.(jpe?g|png|webp|gif|mp4|webm)$/i.test(file.name)
+                    );
+
+                    if (mediaItems.length === 0) continue;
+
+                    const folderBlock = document.createElement('div');
+                    folderBlock.className = "bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 space-y-6 shadow-sm";
+
+                    const headerHtml = `
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2.5 h-2.5 rounded-full bg-indigo-600"></div>
+                                <h3 class="font-black text-lg sm:text-xl text-slate-900 tracking-tight">${folderTitle}</h3>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200/60">${mediaItems.length} items</span>
+                        </div>
+                    `;
+
+                    const mediaGrid = document.createElement('div');
+                    mediaGrid.className = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-5";
+
+                    mediaItems.forEach(media => {
+                        const isVideo = /\.(mp4|webm)$/i.test(media.name);
+                        const rawUrl = media.download_url;
+
+                        const itemCard = document.createElement('div');
+                        itemCard.className = "group relative rounded-2xl overflow-hidden bg-slate-950 aspect-square cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100";
+                        
+                        itemCard.oncontextmenu = (e) => e.preventDefault();
+
+                        if (isVideo) {
+                            itemCard.innerHTML = `
+                                <video src="${rawUrl}#t=0.5" preload="metadata" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 pointer-events-none"></video>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 flex flex-col justify-between p-3.5">
+                                    <span class="self-end bg-black/60 backdrop-blur-md text-[10px] font-bold text-white px-2 py-0.5 rounded-md border border-white/10 flex items-center gap-1">
+                                        <i data-lucide="video" class="w-3 h-3 text-indigo-400"></i> Video
+                                    </span>
+                                    <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center self-center group-hover:bg-indigo-600 group-hover:scale-110 transition-all shadow-lg">
+                                        <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
+                                    </div>
+                                    <div class="h-2"></div>
+                                </div>
+                            `;
+                        } else {
+                            itemCard.innerHTML = `
+                                <img src="${rawUrl}" alt="${media.name}" loading="lazy" class="no-save w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        itemCard.addEventListener('click', () => {
+                            openModal(rawUrl, isVideo, folderTitle);
+                        });
+
+                        mediaGrid.appendChild(itemCard);
+                    });
+
+                    folderBlock.innerHTML = headerHtml;
+                    folderBlock.appendChild(mediaGrid);
+                    container.appendChild(folderBlock);
+                }
+
+                lucide.createIcons();
+            } catch (err) {
+                container.innerHTML = `
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center">
+                        <p class="text-xs text-slate-500">Add folders inside <code>/gallery/</code> on your GitHub repository to showcase events here.</p>
+                    </div>`;
             }
         }
     </script>
